@@ -1,0 +1,15 @@
+:root{
+    --bg:#080b17;
+    --secondary:#111827;
+    --card:#1b2436;
+    --primary:#3b82f6;
+    --primary-hover:#2563eb;
+
+    --text:#ffffff;
+    --text-light:#cbd5e1;
+
+    --radius:18px;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+
+    --transition:.3s;
+}

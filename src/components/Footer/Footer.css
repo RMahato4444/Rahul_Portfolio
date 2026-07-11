@@ -1,0 +1,41 @@
+.footer{
+
+    background:#050816;
+
+    text-align:center;
+
+    padding:60px 10%;
+
+}
+
+.footer h2{
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+
+}
+
+.footer p{
+
+    color:var(--text-light);
+
+}
+
+.footer hr{
+
+    margin:30px auto;
+
+    border:none;
+
+    height:1px;
+
+    background:#2d3748;
+
+}
+
+.copyright{
+
+    font-size:.95rem;
+
+}
