@@ -50,7 +50,7 @@ function Hero() {
 
         <div className="hero-buttons">
           <a
-            href="https://docs.google.com/document/d/1XmVD6yTZ4rsKS2AUkxl11dYr7MiflA89/edit?usp=drive_link&ouid=106335362561112669026&rtpof=true&sd=true"
+            href="https://drive.google.com/file/d/1A-gt1SvWkGgdgJFPPMkwVA1I042APjum/view?usp=sharing"
             className="btn"
           >
             <FaDownload />
