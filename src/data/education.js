@@ -4,7 +4,7 @@ export const education = [
     degree: "Bachelor of Technology (Information Technology)",
     institute: "B.P. Poddar Institute of Management & Technology",
     duration: "2023 – 2027",
-    score: "CGPA: 7.87/10 (Up to 6th Semester)",
+    score: "CGPA: 7.87/10 (Up to 5th Semester)",
   },
 
   {
