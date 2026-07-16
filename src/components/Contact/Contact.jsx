@@ -1,4 +1,6 @@
 import "./Contact.css";
+import { useRef, useState } from "react";
+import { sendEmail } from "../../services/email";
 import {
   FaEnvelope,
   FaPhone,
@@ -9,6 +11,83 @@ import {
 import { motion } from "framer-motion";
 import { SiLeetcode } from "react-icons/si";
 function Contact() {
+  const formRef = useRef();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  switch (name) {
+    case "from_name":
+      setFormData((prev) => ({
+        ...prev,
+        name: value,
+      }));
+      break;
+
+    case "from_email":
+      setFormData((prev) => ({
+        ...prev,
+        email: value,
+      }));
+      break;
+
+    case "subject":
+      setFormData((prev) => ({
+        ...prev,
+        subject: value,
+      }));
+      break;
+
+    case "message":
+      setFormData((prev) => ({
+        ...prev,
+        message: value,
+      }));
+      break;
+
+    default:
+      break;
+  }
+};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
+      setStatus("error");
+      return;
+    }
+
+    setStatus("sending");
+
+    try {
+      await sendEmail(formRef.current);
+
+      setStatus("sent");
+
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+    }
+  };
+
+  const [status, setStatus] = useState("");
   return (
     <motion.section
       id="contact"
@@ -82,16 +161,55 @@ function Contact() {
             </div>
           </div>
 
-          <form className="contact-form">
-            <input type="text" placeholder="Your Name" />
-
-            <input type="email" placeholder="Your Email" />
-
-            <input type="text" placeholder="Subject" />
-
-            <textarea rows="6" placeholder="Your Message"></textarea>
-
-            <button type="submit">Send Message</button>
+          <form ref={formRef} className="contact-form"
+          onSubmit={handleSubmit}
+          >
+            <input
+              type="text"
+              name="from_name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="from_email"
+              placeholder="Your Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              value={formData.subject}
+              onChange={handleChange}
+              required
+            />
+            <textarea
+              rows="6"
+              name="message"
+              placeholder="Your Message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit" disabled={status === "sending"}>
+              {status === "sending" ? "Sending..." : "Send Message"}
+            </button>
+            {status === "sent" && (
+              <p className="form-status success">
+                ✅ Message sent successfully!
+              </p>
+            )}
+            {status === "error" && (
+              <p className="form-status error">
+                ❌ Failed to send message. Please check all fields and try
+                again.
+              </p>
+            )}
           </form>
         </div>
       </div>
