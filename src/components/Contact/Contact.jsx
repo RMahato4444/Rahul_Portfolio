@@ -19,42 +19,42 @@ function Contact() {
     subject: "",
     message: "",
   });
-const handleChange = (e) => {
-  const { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-  switch (name) {
-    case "from_name":
-      setFormData((prev) => ({
-        ...prev,
-        name: value,
-      }));
-      break;
+    switch (name) {
+      case "from_name":
+        setFormData((prev) => ({
+          ...prev,
+          name: value,
+        }));
+        break;
 
-    case "from_email":
-      setFormData((prev) => ({
-        ...prev,
-        email: value,
-      }));
-      break;
+      case "from_email":
+        setFormData((prev) => ({
+          ...prev,
+          email: value,
+        }));
+        break;
 
-    case "subject":
-      setFormData((prev) => ({
-        ...prev,
-        subject: value,
-      }));
-      break;
+      case "subject":
+        setFormData((prev) => ({
+          ...prev,
+          subject: value,
+        }));
+        break;
 
-    case "message":
-      setFormData((prev) => ({
-        ...prev,
-        message: value,
-      }));
-      break;
+      case "message":
+        setFormData((prev) => ({
+          ...prev,
+          message: value,
+        }));
+        break;
 
-    default:
-      break;
-  }
-};
+      default:
+        break;
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -82,7 +82,10 @@ const handleChange = (e) => {
         message: "",
       });
     } catch (error) {
-      console.error(error);
+      console.error("EmailJS Error:", error);
+      console.error("Status:", error.status);
+      console.error("Text:", error.text);
+
       setStatus("error");
     }
   };
@@ -161,9 +164,7 @@ const handleChange = (e) => {
             </div>
           </div>
 
-          <form ref={formRef} className="contact-form"
-          onSubmit={handleSubmit}
-          >
+          <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
             <input
               type="text"
               name="from_name"
